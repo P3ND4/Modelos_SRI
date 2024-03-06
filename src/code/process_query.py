@@ -1,6 +1,6 @@
 #dependencias
 from lex_process import *
-from process_corpus import *
+from process_corpus import load, parse_corpus
 import spacy
 
 #variables globales
