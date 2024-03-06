@@ -38,10 +38,7 @@ def parse_query(query: list) -> list:
   return morph_red
 
 #devolver los documentos
-def rec_docs(query):
-  docs = load()
-  data_query = parse_query(modify_query(query))
-  data_corpus = parse_corpus()
+def rec_docs(data_query: list, data_corpus: list, docs: list):
   result = set()
   
   for i in range(len(data_corpus)):
@@ -89,4 +86,4 @@ def list_to_str(list: list, id: str):
   
   return result    
 
-print(len(rec_docs([['~experimental', 'experimental']])))
+#print(len(rec_docs([['~experimental', 'experimental']])))
