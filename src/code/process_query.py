@@ -1,3 +1,5 @@
+#USAR rec_docs(query parseada por sympy)
+
 #dependencias
 from lex_process import *
 from process_corpus import load, parse_corpus
@@ -21,7 +23,7 @@ def parse_query(query: list) -> list:
 #devolver los documentos
 def rec_docs(query):
   docs = load()
-  data_query = modify_query(parse_query(query))
+  data_query = parse_query(modify_query(query))
   data_corpus = parse_corpus()
   result = set()
   
@@ -29,19 +31,22 @@ def rec_docs(query):
     for part in data_query:
       temp = True
       
-      for word in part:
-        try:
-          value = data_corpus[i][word]
+      for word in part:    
+        parse_word = word if not ID in word else word.replace(ID, '')
+        
+        if not parse_word in data_corpus[i].keys() and ID in word:
+          break
+        
+        else:
+          value = parse_word in data_corpus[i][parse_word]
+          
           if value == 0 if not ID in word else 1:
             temp = False
             break
         
-        except:
-          temp = False
-          break
-      
       if temp:
         result.add(docs[i])
+        break
       
   return result
 
@@ -50,7 +55,7 @@ def modify_query(query: list) -> list:
   result = []
   
   for element in query:
-    result.append(list_to_str(element))
+    result.append(list_to_str(element, ID))
   
   return result
     
@@ -59,8 +64,8 @@ def list_to_str(list: list, id: str):
   result = ''
   
   for element in list:
-    result += f'{element} ' if not '~' in element else f'{id}{element} '
+    result += f'{element}, ' if not '~' in element else f'{id}{element}, '.replace('~', '')
   
   return result    
 
-#print(rec_docs(['ñññññsex']))
+#print(rec_docs([['~sex'], ['of', 'experimental']]))
