@@ -9,14 +9,14 @@ def start():
   data_corpus = parse_corpus()
   
   while(True):
-    query = input('Ingress your query\n')
+    query = input('Ingress your query:\n-> ')
     query_fnd = query_to_dnf(query)
     data_query = parse_query(modify_query(query_fnd))
     response = rec_docs(data_query, data_corpus, docs)
     i = 1
     
     for element in response:
-      if i == 10:
+      if i == 11:
         break
       
       print(f'{i}-{element[:40]}.....')
@@ -24,3 +24,5 @@ def start():
     
     spacy = input('Press enter to go back')
     os.system('clear')
+
+start()
