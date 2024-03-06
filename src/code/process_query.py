@@ -21,7 +21,7 @@ def parse_query(query: list) -> list:
 #devolver los documentos
 def rec_docs(query):
   docs = load()
-  data_query = parse_query(query)
+  data_query = modify_query(parse_query(query))
   data_corpus = parse_corpus()
   result = set()
   
@@ -44,5 +44,23 @@ def rec_docs(query):
         result.add(docs[i])
       
   return result
+
+#modificar la entrada
+def modify_query(query: list) -> list:
+  result = []
+  
+  for element in query:
+    result.append(list_to_str(element))
+  
+  return result
+    
+#parsear la entrada
+def list_to_str(list: list, id: str):
+  result = ''
+  
+  for element in list:
+    result += f'{element} ' if not '~' in element else f'{id}{element} '
+  
+  return result    
 
 #print(rec_docs(['ñññññsex']))
