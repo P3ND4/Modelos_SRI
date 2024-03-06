@@ -1,4 +1,6 @@
 #dependencias
+import sys
+sys.path.append('src/code')
 import ir_datasets
 import spacy
 from lex_process import *
@@ -27,16 +29,28 @@ def parse_corpus() -> dict:
   
   return dict_doc
 
-#llevar de lista a diccionario
+#llevar de lista a diccionario con funcion de peso
 def build_dict(list1: list, list2: list) -> set:
   result = {}
+  cant_words = 0
   
   for element in list1:
+    try: 
+      result[element] += 1
+      cant_words += 1
+      
+    except:
       result[element] = 1
-  
+      cant_words += 1
+    
+
   for element in list2:
     if not element in result.keys():
       result[element] = 0
+      
+  for key in result.keys():
+    if result[key] != 0:
+      result[key] = round(result[key] / cant_words, 5)
   
   return result
 
@@ -59,4 +73,3 @@ def words_docs(corpus: list) -> dict:
   return result
     
 #print(parse_corpus()[0])
-  

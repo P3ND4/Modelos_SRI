@@ -1,8 +1,9 @@
 #USAR rec_docs(query parseada por sympy)
 
 #dependencias
+import sys
+sys.path.append('src/code')
 from lex_process import *
-from process_corpus import load, parse_corpus
 import spacy
 from sympy import sympify, to_dnf
 
@@ -16,7 +17,7 @@ def query_to_dnf(query: str) -> list:
   query = query.lower()
   query = 'a0 or ' + query
   # Reemplazar los términos lógicos con las representaciones de sympy
-  processed_query = query.replace("and", "&").replace("or", "|").replace("not", "~")
+  processed_query = query.replace(" and ", " & ").replace(" or ", " | ").replace(" not ", " ~")
   query_expr = sympify(processed_query, evaluate=False)
   query_dnf = to_dnf(query_expr, simplify=True)
   final_dnf = []
