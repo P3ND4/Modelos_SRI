@@ -1,4 +1,6 @@
 #dependencias
+import sys
+sys.path.append('src/code/boolean')
 from process_query import rec_docs, parse_query, modify_query, query_to_dnf
 from process_corpus import load, parse_corpus
 import os
@@ -41,4 +43,4 @@ def start():
     spacy = input('Press "enter" to go back...')
     os.system('clear')
 
-start()
+#start()
