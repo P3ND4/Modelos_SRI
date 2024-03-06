@@ -3,8 +3,8 @@ from lex_process import *
 from process_corpus import *
 import spacy
 
-#metodos auxiliares
-from utils import list_to_set
+#variables globales
+ID = 'ñññññ'
 
 #devolver la query parseada
 def parse_query(query: list) -> list:
@@ -16,7 +16,7 @@ def parse_query(query: list) -> list:
   rem_noise = remove_noise_spacy(tok)
   rem_sw = remove_stopwords_spacy(rem_noise)
   morph_red = morphological_reduction_spacy(rem_sw)
-  return list(map(list_to_set, morph_red))
+  return morph_red
 
 #devolver los documentos
 def rec_docs(query):
@@ -25,10 +25,24 @@ def rec_docs(query):
   data_corpus = parse_corpus()
   result = set()
   
-  for doc in data_corpus:
+  for i in range(len(data_corpus)):
     for part in data_query:
-      if part.issubset(doc):
-        result.add(doc)
-        break
-  
+      temp = True
+      
+      for word in part:
+        try:
+          value = data_corpus[i][word]
+          if value == 0 if not ID in word else 1:
+            temp = False
+            break
+        
+        except:
+          temp = False
+          break
+      
+      if temp:
+        result.add(docs[i])
+      
   return result
+
+#print(rec_docs(['ñññññsex']))
