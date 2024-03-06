@@ -18,7 +18,7 @@ def query_to_dnf(query: str) -> list:
   final_dnf = []
   for args in query_dnf.args:
     if len(args.args) > 1: final_dnf.append(list(map(str, list(args.args))))
-    else: final_dnf.append(str(args))
+    else: final_dnf.append([str(args)])
   return final_dnf
 
 #devolver la query parseada
