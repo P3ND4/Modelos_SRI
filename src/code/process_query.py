@@ -63,7 +63,7 @@ def rec_docs(data_query: list, data_corpus: list, docs: list):
             break
         
       if temp:
-        result.add(docs[i])
+        result.add((docs[i], i))
         break
       
   return result

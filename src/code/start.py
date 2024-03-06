@@ -14,7 +14,7 @@ def start():
   
   while(True):
     os.system('clear')
-    query = input('Ingress your query:\n-> ')
+    query = input('Ingress your query, then press "enter" to init:\n-> ')
     query_fnd = query_to_dnf(query)
     data_query = parse_query(modify_query(query_fnd))
     response = rec_docs(data_query, data_corpus, docs)
@@ -24,15 +24,21 @@ def start():
     print('RESULTS')
     i = 1
     
-    for element in response:
-      if i == 11:
-        break
+    if len(response) == 0:
+      print('(No search results)')
+    
+    else:
+      print(f'Coincidences: {len(response)}')
       
-      print(f'{i}-{element[:40]}.....')
-      i += 1
+      for element in response:
+        if i == 11:
+          break
+        
+        print(f'{i}. document #{element[1]}: {element[0][:40]}.....')
+        i += 1
     
     print('')
-    spacy = input('Press enter to go back...')
+    spacy = input('Press "enter" to go back...')
     os.system('clear')
 
 start()
