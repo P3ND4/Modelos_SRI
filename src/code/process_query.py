@@ -53,10 +53,14 @@ def rec_docs(query):
         if not parse_word in data_corpus[i].keys() and ID in word:
           break
         
+        elif not parse_word in data_corpus[i].keys():
+         temp = False
+         break
+        
         else:
-          value = parse_word in data_corpus[i][parse_word]
+          value = data_corpus[i][parse_word]
           
-          if value == 0 if not ID in word else 1:
+          if (value == 0 and not ID in word) or (value == 1 and ID in word):
             temp = False
             break
         
@@ -84,4 +88,4 @@ def list_to_str(list: list, id: str):
   
   return result    
 
-#print(rec_docs([['~sex'], ['of', 'experimental']]))
+print(len(rec_docs([['~experimental', 'experimental']])))

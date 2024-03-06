@@ -7,7 +7,7 @@ from lex_process import *
 def load() -> list:
   datasets = ir_datasets.load("cranfield")
   docs = [doc.text for doc in datasets.docs_iter()]
-  return docs[:3]
+  return docs
 
 #devolver el corpus parseado
 def parse_corpus() -> dict:
