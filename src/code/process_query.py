@@ -4,9 +4,25 @@
 from lex_process import *
 from process_corpus import load, parse_corpus
 import spacy
+from sympy import sympify, to_dnf
 
 #variables globales
 ID = 'ñññññ'
+
+#convierte la query a dnf
+def query_to_dnf(query: str) -> list:
+  
+  #Convertir la consulta a minúsculas
+  query = query.lower()
+  # Reemplazar los términos lógicos con las representaciones de sympy
+  processed_query = query.replace("and", "&").replace("or", "|").replace("not", "~")
+  query_expr = sympify(processed_query, evaluate=False)
+  query_dnf = to_dnf(query_expr, simplify=True)
+  final_dnf = []
+  for args in query_dnf.args:
+    if len(args.args) > 1: final_dnf.append(list(map(str, list(args.args))))
+    else: final_dnf.append([str(args)])
+  return final_dnf
 
 #devolver la query parseada
 def parse_query(query: list) -> list:
