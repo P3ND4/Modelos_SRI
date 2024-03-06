@@ -85,5 +85,3 @@ def list_to_str(list: list, id: str):
     result += f'{element}, ' if not '~' in element else f'{id}{element}, '.replace('~', '')
   
   return result    
-
-#print(len(rec_docs([['~experimental', 'experimental']])))
