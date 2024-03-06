@@ -14,6 +14,7 @@ def query_to_dnf(query: str) -> list:
   
   #Convertir la consulta a minúsculas
   query = query.lower()
+  query = 'a0 or ' + query
   # Reemplazar los términos lógicos con las representaciones de sympy
   processed_query = query.replace("and", "&").replace("or", "|").replace("not", "~")
   query_expr = sympify(processed_query, evaluate=False)
@@ -22,7 +23,7 @@ def query_to_dnf(query: str) -> list:
   for args in query_dnf.args:
     if len(args.args) > 1: final_dnf.append(list(map(str, list(args.args))))
     else: final_dnf.append([str(args)])
-  return final_dnf
+  return final_dnf[1:]
 
 #devolver la query parseada
 def parse_query(query: list) -> list:
