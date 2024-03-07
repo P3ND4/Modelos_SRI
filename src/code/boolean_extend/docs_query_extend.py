@@ -37,7 +37,7 @@ def rec_docs(data_query: list, data_corpus: list, docs: list) -> set:
         weight = 0
         
         for word in part:
-          weight += data_corpus[i][word] if not ID in word else 0.00001
+          weight += data_corpus[i][word] if not ID in word else 0
           
         result.add((docs[i], i, weight))
       
