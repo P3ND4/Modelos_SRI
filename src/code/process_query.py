@@ -50,3 +50,5 @@ def modify_query(query: list) -> list:
     result.append(list_to_str(element, ID))
   
   return result
+
+#print(query_to_dnf('of or sex and by'))

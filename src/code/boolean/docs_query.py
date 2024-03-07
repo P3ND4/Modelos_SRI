@@ -1,8 +1,16 @@
+import sys
+sys.path.append('src/code')
 from process_query import ID
 
 #devolver los documentos
 def rec_docs(data_query: list, data_corpus: list, docs: list):
   result = set()
+  
+  #eliminar sub_querys vacias
+  if len(list(filter(lambda x: len(x) != 0, data_query))) == 0:
+    return set()
+  
+  data_query = list(filter(lambda x: len(x) != 0, data_query))
   
   for i in range(len(data_corpus)):
     for part in data_query:
