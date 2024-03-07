@@ -23,7 +23,7 @@ Modelo Booleano: Primero se carga el corpus para instanciar la matriz de pertene
 Modelo Booleano Extendido: Para este se utiliza una matriz similar, pero en lugar de 0 o 1 para indicar si pertenece la palabra, ésta tendrá su peso en el documento, el cual se asocia a su frecuencia. Para asignarle un peso final a cada documento que cumpla con la condición de la consulta, se le asigna la sumatoria de las palabras que aparecen en cada conjunción dentro de la consulta.
 
 ## Insuficiencias de la implementación:
-Para una entrada con "not" podría pasar que al no asignar valor a la palabra operada por este caso, como "A OR NOT B", te muestre documentos donde estén A y B con la misma relevancia que uno donde esté A, suponiendo que A es igualmente relevante para ambos, que tal vez asignando algún valor extra a estos documentos podría solucionar esto.
+Si el usuario proporciona una entrada erronea, no se especifica en el mensaje de error cual fue el problema con su query
 
 ## Fuentes de Datos:
 https://ir-datasets.com

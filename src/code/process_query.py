@@ -51,4 +51,12 @@ def modify_query(query: list) -> list:
   
   return result
 
+def error_checking(query:str):
+  query = query.replace(",", " ").replace(";", " ").replace(".", " ").replace(':', " ")
+  try:
+    value = query_to_dnf(query)
+    return True
+  except:
+    return False
+
 #print(query_to_dnf('of or sex and by'))

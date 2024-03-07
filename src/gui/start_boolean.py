@@ -1,7 +1,7 @@
 #dependencias
 import sys
 sys.path.append('src/code')
-from process_query import parse_query, modify_query, query_to_dnf
+from process_query import parse_query, modify_query, query_to_dnf, error_checking
 from corpus import load
 sys.path.append('src/code/boolean')
 from process_corpus import parse_corpus
@@ -20,6 +20,10 @@ def start():
   while(True):
     os.system('clear')
     query = input('Ingress your query, then press "enter" to init:\n-> ')
+    if not error_checking(query):
+      print("Syntax error in your query")
+      input('Press "enter" to go back...')
+      continue
     query_fnd = query_to_dnf(query)
     data_query = parse_query(modify_query(query_fnd))
     response = rec_docs(data_query, data_corpus, docs)
