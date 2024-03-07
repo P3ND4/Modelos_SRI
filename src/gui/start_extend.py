@@ -1,8 +1,11 @@
 #dependencias
 import sys
+sys.path.append('src/code')
+from process_query import parse_query, modify_query, query_to_dnf
+from corpus import load
 sys.path.append('src/code/boolean_extend')
-from process_query_extend import rec_docs, parse_query, modify_query, query_to_dnf
-from process_corpus_extend import load, parse_corpus
+from process_corpus_extend import parse_corpus
+from docs_query_extend import rec_docs
 import os
 
 #flujo del funcionamiento del modelo booleano extendido

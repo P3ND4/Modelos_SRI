@@ -1,8 +1,11 @@
 #dependencias
 import sys
+sys.path.append('src/code')
+from process_query import parse_query, modify_query, query_to_dnf
+from corpus import load
 sys.path.append('src/code/boolean')
-from process_query import rec_docs, parse_query, modify_query, query_to_dnf
-from process_corpus import load, parse_corpus
+from process_corpus import parse_corpus
+from docs_query import rec_docs
 import os
 
 #flujo del funcionamiento del modelo
